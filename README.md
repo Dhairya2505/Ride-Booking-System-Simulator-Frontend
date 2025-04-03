@@ -21,7 +21,7 @@ The Ride Booking System Simulator Frontend is a mini weekend project I built to 
 ## Installation & Setup Instructions
 
 1. Clone the repository using the following command:
-`git clone https://github.com/Dhairya2505/Ride-Booking-System-Simulator-Frontend.git`
+`https://github.com/Dhairya2505/Ride-Booking-System-Simulator-Frontend.git`
 
 2. Navigate to the project directory : ` cd Ride-Booking-System-Simulator-Frontend`
 
