@@ -15,8 +15,14 @@ The Ride Booking System Simulator Frontend is a mini weekend project I built to 
 
 ## Screenshots
 
-###### Users
-![Users](https://dhairya-singla-baat-cheet-images.s3.ap-south-1.amazonaws.com/users.png)
+###### Book Ride
+![Book](https://dhairyasingla-ride-booking-system-simulator-images.s3.ap-south-1.amazonaws.com/book.png)
+
+###### Wait Timer
+![Wait Timer](https://dhairyasingla-ride-booking-system-simulator-images.s3.ap-south-1.amazonaws.com/timer.png)
+
+###### Ride Timer
+![Ride Timer](https://dhairyasingla-ride-booking-system-simulator-images.s3.ap-south-1.amazonaws.com/timer2.png)
 
 ## Installation & Setup Instructions
 
