@@ -5,26 +5,28 @@ import { motion } from "framer-motion"
 import { Clock } from "lucide-react"
 
 interface RideTimerProps {
-  initialSeconds: number // Waiting time before ride starts (in seconds)
-  rideSeconds: number // Ride duration once it starts (in seconds)
+  initialSeconds: number
+  rideSeconds: number
 }
 
 export default function RideTimer({ initialSeconds, rideSeconds }: RideTimerProps) {
-  const [seconds, setSeconds] = useState(initialSeconds) // Start with waiting time
+  const [seconds, setSeconds] = useState(initialSeconds)
   const [rideStarted, setRideStarted] = useState(false)
 
   useEffect(() => {
     if (seconds <= 0) {
       if (!rideStarted) {
-        setRideStarted(true)
-        setSeconds(rideSeconds) // Start ride timer
+        setTimeout(() => {
+          setRideStarted(true)
+          setSeconds(rideSeconds)
+        }, 100);
       } else {
-        return // Stop timer when ride ends
+        return
       }
     }
-
+    
     const timer = setInterval(() => {
-      setSeconds((prevSeconds) => prevSeconds - 1)
+        setSeconds((prevSeconds) => prevSeconds - 1)
     }, 1000)
 
     return () => clearInterval(timer)
@@ -84,14 +86,14 @@ export default function RideTimer({ initialSeconds, rideSeconds }: RideTimerProp
               Your ride is in progress!
             </motion.p>
             <p className="text-sm text-muted-foreground">
-              Estimated arrival at destination in {Math.floor(seconds / 60)} min
+              Estimated arrival at destination in {seconds} sec
             </p>
           </>
         ) : (
           <>
             <p className="font-medium">Estimated arrival time</p>
             <p className="text-sm text-muted-foreground">
-              Driver is {Math.ceil(seconds / 60)} minutes away
+              Driver is {seconds} seconds away
             </p>
           </>
         )}

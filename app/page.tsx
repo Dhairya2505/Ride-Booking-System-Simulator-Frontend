@@ -21,41 +21,6 @@ export default function RideBookingApp() {
   const [riderName, setRiderName] = useState("")
   const [riderTime, setRideTime] = useState(0)
 
-  // useEffect(() => {
-  //   let id = localStorage.getItem('userId')
-  //     if(!id){
-  //         id = nanoid()
-  //         localStorage.setItem('userId', id)
-  //     }
-  //     setID(id)
-  //   const server = new WebSocket(`ws://localhost:8080/?userId=${id}`)
-  //   setServer(server)
-
-  //   server.onmessage = (event) => {
-  //     const data = JSON.parse(event.data)
-  //     if(data.event == "request"){
-  //       setRiderName(data.riderName)
-  //     }
-
-  //     if(data.event == "accepted"){
-  //       console.log(data)
-  //       setRideTime(parseInt(data.time))
-  //     }
-
-  //     if(data.event == "update"){
-  //       console.log(parseInt(data.time))
-  //       setRideTime(parseInt(data.time))
-  //     }
-
-  //     if(data.event == "complete"){
-  //       // toast
-  //       setIsBooked(false)
-  //     }
-
-  //   }
-
-  // },[])
-
   useEffect(() => {
     let id = localStorage.getItem("userId");
     if (!id) {
@@ -65,14 +30,10 @@ export default function RideBookingApp() {
     setID(id);
   
     const ws = new WebSocket(`ws://localhost:8080/?userId=${id}`);
-
-    ws.onopen = () => console.log("WebSocket connected!");
-
-    ws.onerror = (error) => console.error("WebSocket error:", error);
     
     setServer(ws);
   
-    return () => ws.close(); // Cleanup WebSocket on unmount
+    return () => ws.close();
   }, []);
 
   useEffect(() => {
@@ -84,21 +45,18 @@ export default function RideBookingApp() {
       if (data.event === "request") {
         setRiderName(data.riderName);
       } else if (data.event === "accepted") {
-        console.log(parseInt(data.time));
-        setRideTime(parseInt(data.time));
-      } else if (data.event === "update") {
-        console.log(parseInt(data.time));
         setRideTime(parseInt(data.time));
       } else if (data.event === "complete") {
-        console.log("Ride completed!");
-        setIsBooked(false);
+        setTimeout(() => {
+          setIsBooked(false);
+        }, 2000);
       }
     };
   
     Server.onmessage = handleMessage;
   
     return () => {
-      Server.onmessage = null; // Cleanup when server changes
+      Server.onmessage = null;
     };
   }, [Server]);
 
@@ -214,12 +172,6 @@ export default function RideBookingApp() {
             </motion.div>
           )}
 
-          {/* <motion.div variants={itemVariants} className="mt-6">
-            <div className="flex justify-between text-sm text-muted-foreground">
-              <span>Available drivers: 5 nearby</span>
-              <span>Avg. wait time: 3 min</span>
-            </div>
-          </motion.div> */}
         </motion.div>
       </main>
 
